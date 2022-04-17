@@ -1,26 +1,26 @@
-#include "main.h"
-
+#include "holberton.h"
 /**
- * get_func - look for the specifier
- * @x: variable to the function
- * Return: function
- */
-int (*get_func(char x))(va_list)
+* get_func - search and return the correct function
+* @s: array to check
+* Return: return a function (if written correctly)
+**/
+int (*get_func(char s))(va_list)
 {
-	int i = 0;
-	spec arr[] = {
+	op_t ops[] = {
 		{"c", print_c},
 		{"s", print_s},
-		{"%", print_percent},
 		{"d", print_d},
 		{"i", print_i},
+		{"b", print_b},
 		{NULL, NULL}
 	};
-	while (arr[i].valid)
+
+	int i;
+
+	for (i = 0; ops[i].c != NULL; i++)
 	{
-		if (x == arr[i].valid[0])
-			return (arr[i].f);
-		i++;
+		if (*ops[i].c == s)
+			return (ops[i].f);
 	}
 	return (NULL);
 }
